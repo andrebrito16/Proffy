@@ -43,6 +43,13 @@ export default class ClassesController {
        return response.json(classes);
     }
 
+    async all(request: Request, response: Response) {
+        const classes = await db('classes')
+          .join('users', 'classes.user_id', '=', 'users.id')
+          .select(['classes.*', 'users.*']);
+        return response.json(classes);
+      }
+
 
     async create (request: Request, response: Response) {  
         const {
@@ -51,7 +58,7 @@ export default class ClassesController {
             whatsapp,
             bio,
             subject,
-            coast,
+            cost,
             schedule
         } = request.body;
     
@@ -69,7 +76,7 @@ export default class ClassesController {
     
         const insertedClassesIds = await trx('classes').insert({
             subject,
-            coast,
+            cost,
             user_id,
         });
     

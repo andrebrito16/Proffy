@@ -11,6 +11,7 @@ routes.get('/classes', classesController.index);
 
 routes.post('/connections', connectionsController.create)
 routes.get('/connections', connectionsController.index)
+routes.get('/classes/all', classesController.all);
 
 
 export default routes
